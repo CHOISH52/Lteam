@@ -24,7 +24,8 @@
 
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
-                window.reader = ePubReader("https://s3.amazonaws.com/moby-dick/", {
+//                window.reader = ePubReader("https://s3.amazonaws.com/moby-dick/", {
+                window.reader = ePubReader("../resources/test.epub", {
                    restore: true
                  });
               }
