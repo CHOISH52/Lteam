@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,59 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="description" content="ePubViewer is an powerful, modern, and easy-to-use web app for reading ebooks.">
 </head>
+=======
+        <link rel="stylesheet" href="../resources/css/normalize.css">
+        <link rel="stylesheet" href="../resources/css/main.css">
+        <link rel="stylesheet" href="../resources/css/popup.css">
+
+        <script src="../resources/js/jquery.min.js"></script>
+
+        <script src="../resources/js/zip.min.js"></script>
+
+        <script>
+            "use strict";
+
+            document.onreadystatechange = function () {
+              if (document.readyState == "complete") {
+//                window.reader = ePubReader("https://s3.amazonaws.com/moby-dick/", {
+                window.reader = ePubReader("../resources/test.epub", {
+                   restore: true
+                 });
+              }
+            };
+
+        </script>
+
+        <!-- File Storage -->
+        <!-- <script src="js/libs/localforage.min.js"></script> -->
+
+        <!-- Full Screen -->
+        <script src="../resources/js/screenfull.min.js"></script>
+
+        <!-- Render -->
+        <script src="../resources/js/epub1.js"></script>
+
+        <!-- Reader -->
+        <script src="../resources/js/reader.js"></script>
+
+        <!-- Plugins -->
+        <!-- <script src="js/plugins/search.js"></script> -->
+
+        <!-- Highlights -->
+        <!-- <script src="js/libs/jquery.highlight.js"></script> -->
+        <!-- <script src="js/hooks/extensions/highlight.js"></script> -->
+
+    </head>
+    <body>
+      <div id="sidebar">
+        <div id="panels">
+          <!-- <input id="searchBox" placeholder="search" type="search"> -->
+
+          <!-- <a id="show-Search" class="show_view icon-search" data-view="Search">Search</a> -->
+          <a id="show-Toc" class="show_view icon-list-1 active" data-view="Toc">TOC</a>
+          <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>
+          <!-- <a id="show-Notes" class="show_view icon-edit" data-view="Notes">Notes</a> -->
+>>>>>>> a8865a1fa6b66a15a6663dc7e8ee765adc6c75cc
 
 <body>
     <div class="app">
