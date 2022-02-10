@@ -21,7 +21,7 @@
 	<li><a href="member/update">개인정보 수정</a></li>
 </c:if>	
 	<li><a href="board/list">게시판</a></li>
-</ul>
+</ul>cgvcbcg
 
 </body>
 </html>
