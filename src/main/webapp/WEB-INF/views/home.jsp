@@ -23,5 +23,6 @@
 	<li><a href="board/list">게시판</a></li>
 </ul>cgvcbcg
 svsdfgbfh
+dfsasdf
 </body>
 </html>
