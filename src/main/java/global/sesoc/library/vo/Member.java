@@ -13,7 +13,7 @@ public class Member {
 	
 	public Member() {
 	}
-	
+	 
 	public Member(String id, String password, String name, String phone, String address, String email) {
 		this.id = id;
 		this.password = password;

@@ -1,5 +1,5 @@
 package global.sesoc.library.vo;
-
+ 
 /**
  * 리플 정보 VO
  */
@@ -9,7 +9,7 @@ public class Reply {
 	String id;					//작성자 ID
 	String text;				//리플내용
 	String inputdate;			//작성날짜
-	
+	 
 	public Reply() {
 	}
 

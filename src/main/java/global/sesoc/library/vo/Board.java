@@ -11,7 +11,7 @@ public class Board {
 	private int hits;					//조회수
 	private String originalfile;		//첨부파일 원래이름
 	private String savedfile;			//첨부파일 저장된 이름
-	
+	 
 	public Board() {
 	}
 	
