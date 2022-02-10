@@ -6,7 +6,7 @@
 	<title>Web5</title>
 </head>
 <body>
-<h1>[ web5 ]</h1>
+<h1>[ web5 ]안녕</h1>
 
 <c:if test="${sessionScope.loginId != null}">
 	<p>${sessionScope.loginName} (${sessionScope.loginId})님 로그인 중</p>
