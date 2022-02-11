@@ -1,0 +1,35 @@
+package global.sesoc.library.dao;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
+
+import global.sesoc.library.vo.Board;
+import global.sesoc.library.vo.Reply;
+
+
+public interface BoardMapper {
+	
+	public int insertBoard(Board board);
+	
+	public Board getBoard(int boardnum);
+	
+	public int addHits(int boardnum);
+	
+	public int getTotal(String searchText);
+	
+	public ArrayList<Board> listBoard(String searchText, RowBounds rb);
+	
+	public int deleteBoard(Board board);
+	
+	public int updateBoard(Board board);
+
+	
+	public int insertReply(Reply reply);
+
+	public ArrayList<Reply> listReply(int boardnum);
+	
+	public int deleteReply(Reply reply);
+	
+	public int updateReply(Reply reply);
+}
