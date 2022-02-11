@@ -29,7 +29,7 @@ import global.sesoc.library.vo.Board;
 import global.sesoc.library.vo.Reply;
 
 /**
- * 게시판 콘트롤러
+ * 寃뚯떆�뙋 肄섑듃濡ㅻ윭
  */
 @Controller
 @RequestMapping("board")
@@ -39,13 +39,13 @@ public class BoardController {
 	@Autowired
 	BoardDAO dao;
 	
-	//게시판 관련 상수값들
-	final int countPerPage = 10;			//페이지당 글 수
-	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
-	final String uploadPath = "/boardfile";	//파일 업로드 경로
+	//寃뚯떆�뙋 愿��젴 �긽�닔媛믩뱾
+	final int countPerPage = 10;			//�럹�씠吏��떦 湲� �닔
+	final int pagePerGroup = 5;				//�럹�씠吏� �씠�룞 留곹겕瑜� �몴�떆�븷 �럹�씠吏� �닔
+	final String uploadPath = "/boardfile";	//�뙆�씪 �뾽濡쒕뱶 寃쎈줈
 
 	/**
-	 * 글쓰기 폼 보기
+	 * 湲��벐湲� �뤌 蹂닿린
 	 */
 	@RequestMapping (value="write", method=RequestMethod.GET)
 	public String write() {
@@ -53,7 +53,7 @@ public class BoardController {
 	}
 	
 	/** 
-	 * 글 저장
+	 * 湲� ���옣
 	 */
 	@RequestMapping (value="write", method=RequestMethod.POST)
 	public String write(
@@ -62,18 +62,18 @@ public class BoardController {
 			, Board board 
 			, MultipartFile upload) {
 		
-		//세션에서 로그인한 사용자의 아이디를 읽어서 Board객체의 작성자 정보에 세팅
+		//�꽭�뀡�뿉�꽌 濡쒓렇�씤�븳 �궗�슜�옄�쓽 �븘�씠�뵒瑜� �씫�뼱�꽌 Board媛앹껜�쓽 �옉�꽦�옄 �젙蹂댁뿉 �꽭�똿
 		String id = (String) session.getAttribute("loginId");
 		board.setId(id);
 		
-		logger.info("저장할 글 정보 : {}", board);
-		logger.debug("파일 정보 : {}", upload.getContentType());
-		logger.debug("파일 정보 : {}", upload.getName());
-		logger.debug("파일 정보 : {}", upload.getOriginalFilename());
-		logger.debug("파일 정보 : {}", upload.getSize());
-		logger.debug("파일 정보 : {}", upload.isEmpty());
+		logger.info("���옣�븷 湲� �젙蹂� : {}", board);
+		logger.debug("�뙆�씪 �젙蹂� : {}", upload.getContentType());
+		logger.debug("�뙆�씪 �젙蹂� : {}", upload.getName());
+		logger.debug("�뙆�씪 �젙蹂� : {}", upload.getOriginalFilename());
+		logger.debug("�뙆�씪 �젙蹂� : {}", upload.getSize());
+		logger.debug("�뙆�씪 �젙蹂� : {}", upload.isEmpty());
 	
-		//첨부파일이 있는 경우 지정된 경로에 저장하고, 원본 파일명과 저장된 파일명을 Board객체에 세팅
+		//泥⑤��뙆�씪�씠 �엳�뒗 寃쎌슦 吏��젙�맂 寃쎈줈�뿉 ���옣�븯怨�, �썝蹂� �뙆�씪紐낃낵 ���옣�맂 �뙆�씪紐낆쓣 Board媛앹껜�뿉 �꽭�똿
 		if (!upload.isEmpty()) {
 			String savedfile = FileService.saveFile(upload, uploadPath);
 			board.setOriginalfile(upload.getOriginalFilename());
@@ -85,7 +85,7 @@ public class BoardController {
 	}
 	
 	/**
-	 * 글목록
+	 * 湲�紐⑸줉
 	 */
 	@RequestMapping (value="list", method=RequestMethod.GET)
 	public String list(
@@ -95,39 +95,40 @@ public class BoardController {
 		
 		logger.debug("page: {}, searchText: {}", page, searchText);
 		
-		int total = dao.getTotal(searchText);			//전체 글 개수
+		int total = dao.getTotal(searchText);			//�쟾泥� 湲� 媛쒖닔
 		
-		//페이지 계산을 위한 객체 생성
+		//�럹�씠吏� 怨꾩궛�쓣 �쐞�븳 媛앹껜 �깮�꽦
 		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total); 
 		
-		//검색어와 시작 위치, 페이지당 글 수를 전달하여 목록 읽기
+		//寃��깋�뼱�� �떆�옉 �쐞移�, �럹�씠吏��떦 湲� �닔瑜� �쟾�떖�븯�뿬 紐⑸줉 �씫湲�
 		ArrayList<Board> boardlist = dao.listBoard(searchText, navi.getStartRecord(), navi.getCountPerPage());	
 		
-		//페이지 정보 객체와 글 목록, 검색어를 모델에 저장
+		//�럹�씠吏� �젙蹂� 媛앹껜�� 湲� 紐⑸줉, 寃��깋�뼱瑜� 紐⑤뜽�뿉 ���옣
 		model.addAttribute("boardlist", boardlist);
 		model.addAttribute("navi", navi);
 		model.addAttribute("searchText", searchText);
 		
-		return "boardjsp/boardList";
+		//return "boardjsp/boardList";
+		return "viewer";
 	}
 
 	/**
-	 * 글 읽기
-	 * @param boardnum 읽을 글번호
-	 * @return 해당 글 정보
+	 * 湲� �씫湲�
+	 * @param boardnum �씫�쓣 湲�踰덊샇
+	 * @return �빐�떦 湲� �젙蹂�
 	 */
 	@RequestMapping (value="read", method=RequestMethod.GET)
 	public String read(int boardnum, Model model) {
-		//전달된 글 번호로 해당 글정보 읽기
+		//�쟾�떖�맂 湲� 踰덊샇濡� �빐�떦 湲��젙蹂� �씫湲�
 		Board board = dao.getBoard(boardnum);
 		if (board == null) {
 			return "redirect:list";
 		}
 		
-		//해당 글에 달린 리플목록 읽기
+		//�빐�떦 湲��뿉 �떖由� 由ы뵆紐⑸줉 �씫湲�
 		ArrayList<Reply> replylist = dao.listReply(boardnum);
 		
-		//본문글정보와 리플목록을 모델에 저장
+		//蹂몃Ц湲��젙蹂댁� 由ы뵆紐⑸줉�쓣 紐⑤뜽�뿉 ���옣
 		model.addAttribute("board", board);
 		model.addAttribute("replylist", replylist);
 		
@@ -135,14 +136,14 @@ public class BoardController {
 	}
 	
 	/**
-	 * 파일 다운로드
-	 * @param boardnum 파일이 첨부된 글 번호
+	 * �뙆�씪 �떎�슫濡쒕뱶
+	 * @param boardnum �뙆�씪�씠 泥⑤��맂 湲� 踰덊샇
 	 */
 	@RequestMapping(value = "download", method = RequestMethod.GET)
 	public String fileDownload(int boardnum, Model model, HttpServletResponse response) {
 		Board board = dao.getBoard(boardnum);
 		
-		//원래의 파일명
+		//�썝�옒�쓽 �뙆�씪紐�
 		String originalfile = new String(board.getOriginalfile());
 		try {
 			response.setHeader("Content-Disposition", " attachment;filename="+ URLEncoder.encode(originalfile, "UTF-8"));
@@ -150,10 +151,10 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		//저장된 파일 경로
+		//���옣�맂 �뙆�씪 寃쎈줈
 		String fullPath = uploadPath + "/" + board.getSavedfile();
 		
-		//서버의 파일을 읽을 입력 스트림과 클라이언트에게 전달할 출력스트림
+		//�꽌踰꾩쓽 �뙆�씪�쓣 �씫�쓣 �엯�젰 �뒪�듃由쇨낵 �겢�씪�씠�뼵�듃�뿉寃� �쟾�떖�븷 異쒕젰�뒪�듃由�
 		FileInputStream filein = null;
 		ServletOutputStream fileout = null;
 		
@@ -161,7 +162,7 @@ public class BoardController {
 			filein = new FileInputStream(fullPath);
 			fileout = response.getOutputStream();
 			
-			//Spring의 파일 관련 유틸 이용하여 출력
+			//Spring�쓽 �뙆�씪 愿��젴 �쑀�떥 �씠�슜�븯�뿬 異쒕젰
 			FileCopyUtils.copy(filein, fileout);
 			
 			filein.close();
@@ -174,24 +175,24 @@ public class BoardController {
 	}
 
 	/**
-	 * 글 삭제
+	 * 湲� �궘�젣
 	 */
 	@RequestMapping (value="delete", method=RequestMethod.GET)
 	public String delete(HttpSession session, int boardnum) {
 		String id = (String) session.getAttribute("loginId");
 		
-		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
+		//�궘�젣�븷 湲� 踰덊샇�� 蹂몄씤 湲��씤吏� �솗�씤�븷 濡쒓렇�씤�븘�씠�뵒
 		Board board = new Board();
 		board.setBoardnum(boardnum);
 		board.setId(id);
 		
-		//첨부된 파일이 있는지 먼저 확인
+		//泥⑤��맂 �뙆�씪�씠 �엳�뒗吏� 癒쇱� �솗�씤
 		String savedfile = dao.getBoard(boardnum).getSavedfile();
 		
-		//글 삭제
+		//湲� �궘�젣
 		int result = dao.deleteBoard(board);
 		
-		//글 삭제 성공 and 첨부된 파일이 있는 경우 파일도 삭제
+		//湲� �궘�젣 �꽦怨� and 泥⑤��맂 �뙆�씪�씠 �엳�뒗 寃쎌슦 �뙆�씪�룄 �궘�젣
 		if (result == 1 && savedfile != null) {
 			FileService.deleteFile(uploadPath + "/" + savedfile);
 		}
@@ -200,7 +201,7 @@ public class BoardController {
 	}
 	
 	/**
-	 * 글 수정 폼으로 이동
+	 * 湲� �닔�젙 �뤌�쑝濡� �씠�룞
 	 */
 	@RequestMapping (value="edit", method=RequestMethod.GET)
 	public String editForm(HttpSession session, Model model, int boardnum) {
@@ -211,8 +212,8 @@ public class BoardController {
 	}
 	
 	/**
-	 * 글 수정 처리
-	 * @param board 수정할 글 정보
+	 * 湲� �닔�젙 泥섎━
+	 * @param board �닔�젙�븷 湲� �젙蹂�
 	 */
 	@RequestMapping (value="edit", method=RequestMethod.POST)
 	public String edit(
@@ -220,41 +221,41 @@ public class BoardController {
 			, Board board
 			, MultipartFile upload) {
 		
-		//수정할 글이 로그인한 본인 글인지 확인
+		//�닔�젙�븷 湲��씠 濡쒓렇�씤�븳 蹂몄씤 湲��씤吏� �솗�씤
 		String id = (String) session.getAttribute("loginId");
 		Board oldBoard = dao.getBoard(board.getBoardnum());
 		if (oldBoard == null || !oldBoard.getId().equals(id)) {
 			return "redirect:list";
 		}
 		
-		//수정할 정보에 로그인 아이디 저장
+		//�닔�젙�븷 �젙蹂댁뿉 濡쒓렇�씤 �븘�씠�뵒 ���옣
 		board.setId(id);
 		
-		//수정 시 새로 첨부한 파일이 있으면 기존 파일을 삭제하고 새로 업로드
+		//�닔�젙 �떆 �깉濡� 泥⑤��븳 �뙆�씪�씠 �엳�쑝硫� 湲곗〈 �뙆�씪�쓣 �궘�젣�븯怨� �깉濡� �뾽濡쒕뱶
 		if (!upload.isEmpty()) {
-			//기존 글에 첨부된 파일의 실제 저장된 이름
+			//湲곗〈 湲��뿉 泥⑤��맂 �뙆�씪�쓽 �떎�젣 ���옣�맂 �씠由�
 			String savedfile = oldBoard.getSavedfile();
-			//기존 파일이 있으면 삭제
+			//湲곗〈 �뙆�씪�씠 �엳�쑝硫� �궘�젣
 			if (savedfile != null) {
 				FileService.deleteFile(uploadPath + "/" + savedfile);
 			}
 			
-			//새로 업로드한 파일 저장
+			//�깉濡� �뾽濡쒕뱶�븳 �뙆�씪 ���옣
 			savedfile = FileService.saveFile(upload, uploadPath);
 			
-			//수정 정보에 새로 저장된 파일명과 원래의 파일명 저장
+			//�닔�젙 �젙蹂댁뿉 �깉濡� ���옣�맂 �뙆�씪紐낃낵 �썝�옒�쓽 �뙆�씪紐� ���옣
 			board.setOriginalfile(upload.getOriginalFilename());
 			board.setSavedfile(savedfile);
 		}
 		
-		//글 수정 처리
+		//湲� �닔�젙 泥섎━
 		dao.updateBoard(board);
-		//원래의 글읽기 화면으로 이동 
+		//�썝�옒�쓽 湲��씫湲� �솕硫댁쑝濡� �씠�룞 
 		return "redirect:read?boardnum=" + board.getBoardnum();
 	}
 	
 	/**
-	 * 리플 저장 처리
+	 * 由ы뵆 ���옣 泥섎━
 	 */
 	@RequestMapping (value="replyWrite", method=RequestMethod.POST)
 	public String replyWrite(
@@ -262,25 +263,25 @@ public class BoardController {
 			HttpSession session, 
 			Model model) {
 		
-		//세션에서 로그인한 사용자의 아이디를 읽어서 Reply객체의 작성자 정보에 세팅
+		//�꽭�뀡�뿉�꽌 濡쒓렇�씤�븳 �궗�슜�옄�쓽 �븘�씠�뵒瑜� �씫�뼱�꽌 Reply媛앹껜�쓽 �옉�꽦�옄 �젙蹂댁뿉 �꽭�똿
 		String id = (String) session.getAttribute("loginId");
 		reply.setId(id);
 		
-		//리플 정보를 DB에 저장
+		//由ы뵆 �젙蹂대�� DB�뿉 ���옣
 		dao.insertReply(reply);
 		
-		//읽던 게시글로 되돌아 감
+		//�씫�뜕 寃뚯떆湲�濡� �릺�룎�븘 媛�
 		return "redirect:read?boardnum=" + reply.getBoardnum();
 	}
 	
 	/**
-	 * 리플 삭제
+	 * 由ы뵆 �궘�젣
 	 */
 	@RequestMapping (value="replyDelete", method=RequestMethod.GET)
 	public String deleteReply(Reply reply, HttpSession session) {
 		String id = (String) session.getAttribute("loginId");
 		
-		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
+		//�궘�젣�븷 湲� 踰덊샇�� 蹂몄씤 湲��씤吏� �솗�씤�븷 濡쒓렇�씤�븘�씠�뵒
 		reply.setId(id);
 		
 		dao.deleteReply(reply);
@@ -288,19 +289,19 @@ public class BoardController {
 	}
 	
 	/**
-	 * 리플 수정 처리
-	 * @param reply 수정할 리플 정보
+	 * 由ы뵆 �닔�젙 泥섎━
+	 * @param reply �닔�젙�븷 由ы뵆 �젙蹂�
 	 */
 	@RequestMapping (value="replyEdit", method=RequestMethod.POST)
 	public String replyEdit(HttpSession session, Reply reply) {
 		
-		//삭제할 리플 정보와 본인 글인지 확인할 로그인아이디
+		//�궘�젣�븷 由ы뵆 �젙蹂댁� 蹂몄씤 湲��씤吏� �솗�씤�븷 濡쒓렇�씤�븘�씠�뵒
 		String id = (String) session.getAttribute("loginId");
 		reply.setId(id);
 		
-		//리플  수정 처리
+		//由ы뵆  �닔�젙 泥섎━
 		dao.updateReply(reply);
-		//원래의 글읽기 화면으로 이동 
+		//�썝�옒�쓽 湲��씫湲� �솕硫댁쑝濡� �씠�룞 
 		return "redirect:read?boardnum=" + reply.getBoardnum();
 	}
 }
