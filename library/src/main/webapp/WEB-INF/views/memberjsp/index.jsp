@@ -66,8 +66,8 @@
                                             Board
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                            <a class="dropdown-item" href="top_place.html">Info</a>
-                                            <a class="dropdown-item" href="tour_details.html">QnA</a>
+                                            <a class="dropdown-item" href="top_place.html">Notice/QNA</a>
+                                            <a class="dropdown-item" href="tour_details.html">Essay</a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
