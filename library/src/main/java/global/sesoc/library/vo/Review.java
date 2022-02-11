@@ -3,13 +3,12 @@ package global.sesoc.library.vo;
 /**
  * 책에 대한 평점 및 한줄평 VO
  */
-public class review {
+public class Review {
 	int reviewnum;
 	int booknum;
 	String id;
-	String contents;
+	String content;
 	String inputdate;
-	int photo;
-	
+	String hits;
 	
 }

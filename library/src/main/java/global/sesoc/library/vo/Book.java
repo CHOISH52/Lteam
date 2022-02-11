@@ -3,15 +3,18 @@ package global.sesoc.library.vo;
 /**
  * Ã¥ Á¤º¸ VO
  */
-public class book {
+public class Book {
 	
 	int booknum;
 	String title;
-	String writer;
+	String author;
 	String publisher;
-	String P_date;
+	String p_date;
 	float score;
 	String introduce;
+	int genre_type;
+	int book_photo;
+	int bookfile;
 	
 	
 }
