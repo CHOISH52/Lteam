@@ -21,8 +21,7 @@
 	<li><a href="member/update">개인정보 수정</a></li>
 </c:if>	
 	<li><a href="board/list">게시판</a></li>
-</ul>cgvcbcg
-svsdfgbfh
-dfsasdf
+</ul>
+<a href="member/index">메인화면단</a>
 </body>
 </html>
